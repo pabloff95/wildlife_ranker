@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      target: builder
+      dockerfile: Dockerfile
+    entrypoint: ["npm", "start"]
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_HOST=0.0.0.0
