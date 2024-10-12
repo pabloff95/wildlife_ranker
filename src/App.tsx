@@ -1,15 +1,18 @@
 import AnimalSearch from "./pages/AnimalSearch";
+import BaseLayout from "./pages/BaseLayout";
+import Favorites from "./pages/Favorites";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="bg-gray-100 min-h-[100vh] w-full flex flex-col">
-      <header>
-        <h1 className="text-center">Wildlife Ranker</h1>
-      </header>
-      <main className="grow flex items-center justify-center">
-        <AnimalSearch />
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<BaseLayout />}>
+          <Route path="/" element={<AnimalSearch />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
