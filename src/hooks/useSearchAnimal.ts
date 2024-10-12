@@ -43,7 +43,10 @@ const parseAnimalNinjaAPIResponse = (
   return animalsRawData.map((animal) => {
     const { name, taxonomy, locations, characteristics } = animal;
 
-    const fakeId = `${Date.now()}-${Math.random().toString(36)}`; // Mock a fake "id" that serves the purpose of this simply application
+    // The API does not provide a id, so instead here a fake id is created instead, in order to track the animals in the favorite list
+    const fakeId = `${name.split(" ").join("_")}_${taxonomy.scientific_name
+      .split(" ")
+      .join("_")}`;
 
     const attributes = {
       // Here just a few atrributes listed to meet the requirements of this app

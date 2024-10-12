@@ -23,19 +23,8 @@ export default function AnimalsOverview({
     <section
       className={`flex flex-row flex-wrap mx-auto justify-between gap-y-4 ${sectionClassName}`}
     >
-      {animals.map(({ name, scientificName, _id, locations, attributes }) => {
-        const isFavourite = false; // TODO: replace by localStorage check
-
-        return (
-          <AnimalOvervierwCard
-            name={name}
-            scientificName={scientificName}
-            key={_id}
-            locations={locations}
-            attributes={attributes}
-            isFavourite={isFavourite}
-          />
-        );
+      {animals.map((animal) => {
+        return <AnimalOvervierwCard animal={animal} key={animal._id} />;
       })}
     </section>
   );

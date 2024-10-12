@@ -1,29 +1,32 @@
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import { AnimalAttributes } from "../hooks/useSearchAnimal";
+import { AnimalInformation } from "../hooks/useSearchAnimal";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import useToggleFavoriteAnimal from "../hooks/localStorage/useToggleFavoriteAnimal";
+import useIsAnimalInFavoriteList from "../hooks/localStorage/useIsAnimalInFavoriteList";
 
 interface AnimalOvervierwCardProps {
-  name: string;
-  scientificName: string;
-  locations: string[];
-  attributes: AnimalAttributes;
-  isFavourite: boolean;
+  animal: AnimalInformation;
 }
 
 export default function AnimalOvervierwCard({
-  name,
-  scientificName,
-  locations,
-  attributes,
-  isFavourite,
+  animal,
 }: AnimalOvervierwCardProps) {
+  const { attributes, name, scientificName, locations, _id } = animal;
   const { groupBehavior, habitat, diet, group, lifespan } = attributes;
 
+  const [isFavourite, setIsFavourite] = useState<boolean>(
+    useIsAnimalInFavoriteList({ _id })
+  );
+
+  const toggleFavoriteAnimal = useToggleFavoriteAnimal({ animal });
+
   const toggleFavorite = () => {
-    console.log("TODO: add / remove from localStorage");
+    toggleFavoriteAnimal();
+    setIsFavourite(!isFavourite);
   };
 
   return (
