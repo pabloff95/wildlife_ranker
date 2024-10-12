@@ -29,7 +29,7 @@ export default function AnimalSearchForm({ setQuery }: AnimalSearchFormProps) {
   };
 
   return (
-    <div className=" w-4/6">
+    <div className="w-full">
       <Paper
         component="form"
         className="flex align-items-center"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface AnimalInformation {
+interface AnimalNinjaAPIRawData {
   name: string;
   taxonomy: {
     [key: string]: string;
@@ -9,6 +9,22 @@ interface AnimalInformation {
   characteristics: {
     [key: string]: string;
   };
+}
+
+interface AnimalAttributes {
+  groupBehavior: string;
+  habitat: string;
+  diet: string;
+  group: string;
+  lifespan: string;
+}
+
+interface AnimalInformation {
+  _id: string;
+  name: string;
+  scientificName: string;
+  locations: string[];
+  attributes: AnimalAttributes;
 }
 
 interface UseSearchAnimalProps {
@@ -20,6 +36,33 @@ interface UseSearchAnimalReturn {
   error: string;
   isLoading: boolean;
 }
+
+const parseAnimalNinjaAPIResponse = (
+  animalsRawData: AnimalNinjaAPIRawData[]
+): AnimalInformation[] => {
+  return animalsRawData.map((animal) => {
+    const { name, taxonomy, locations, characteristics } = animal;
+
+    const fakeId = `${Date.now()}-${Math.random().toString(36)}`; // Mock a fake "id" that serves the purpose of this simply application
+
+    const attributes = {
+      // Here just a few atrributes listed to meet the requirements of this app
+      groupBehavior: characteristics?.group_behavior || "-",
+      habitat: characteristics?.habitat || "-",
+      diet: characteristics?.diet || "-",
+      group: characteristics?.group || "-",
+      lifespan: characteristics?.lifespan || "-",
+    };
+
+    return {
+      _id: fakeId,
+      name,
+      scientificName: taxonomy.scientific_name,
+      locations,
+      attributes,
+    };
+  });
+};
 
 const useSearchAnimal = ({
   query,
@@ -61,7 +104,10 @@ const useSearchAnimal = ({
           throw new Error(standarQueryError);
         }
 
-        const data = await response.json();
+        const data = await response
+          .json()
+          .then((jsonData) => parseAnimalNinjaAPIResponse(jsonData));
+
         setAnimalInformation(data);
       } catch (e: unknown) {
         if (e instanceof Error) {
@@ -82,4 +128,4 @@ const useSearchAnimal = ({
 };
 
 export { useSearchAnimal };
-export type { UseSearchAnimalReturn, AnimalInformation };
+export type { UseSearchAnimalReturn, AnimalInformation, AnimalAttributes };
