@@ -1,4 +1,4 @@
-import AnimalSearch from "./components/AnimalSearch";
+import AnimalSearch from "./pages/AnimalSearch";
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
         <h1 className="text-center">Wildlife Ranker</h1>
       </header>
       <main className="grow flex items-center justify-center">
-        <AnimalSearch></AnimalSearch>
+        <AnimalSearch />
       </main>
     </div>
   );
