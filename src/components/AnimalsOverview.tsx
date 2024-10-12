@@ -1,15 +1,18 @@
 import { AnimalInformation } from "../hooks/useSearchAnimal";
 import Alert from "@mui/material/Alert";
 import AnimalOvervierwCard from "./AnimalOverviewCard";
+import { Dispatch, SetStateAction } from "react";
 
 interface AnimalsOverviewProps {
   animals: AnimalInformation[];
+  setNotifyFavoriteChange?: Dispatch<SetStateAction<number>>;
   sectionClassName?: string;
 }
 
 export default function AnimalsOverview({
   animals,
   sectionClassName,
+  setNotifyFavoriteChange,
 }: AnimalsOverviewProps) {
   if (animals.length === 0) {
     return (
@@ -21,10 +24,18 @@ export default function AnimalsOverview({
 
   return (
     <section
-      className={`flex flex-row flex-wrap mx-auto justify-between gap-y-4 ${sectionClassName}`}
+      className={`w-full flex flex-row flex-wrap mx-auto justify-center gap-4 ${
+        sectionClassName ?? ""
+      }`}
     >
       {animals.map((animal) => {
-        return <AnimalOvervierwCard animal={animal} key={animal._id} />;
+        return (
+          <AnimalOvervierwCard
+            animal={animal}
+            key={animal._id}
+            setNotifyFavoriteChange={setNotifyFavoriteChange}
+          />
+        );
       })}
     </section>
   );

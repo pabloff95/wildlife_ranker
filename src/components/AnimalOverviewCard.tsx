@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -8,13 +8,15 @@ import IconButton from "@mui/material/IconButton";
 import useToggleFavoriteAnimal from "../hooks/localStorage/useToggleFavoriteAnimal";
 import useIsAnimalInFavoriteList from "../hooks/localStorage/useIsAnimalInFavoriteList";
 
-interface AnimalOvervierwCardProps {
+interface AnimalOverviewCardProps {
   animal: AnimalInformation;
+  setNotifyFavoriteChange?: Dispatch<SetStateAction<number>>;
 }
 
 export default function AnimalOvervierwCard({
   animal,
-}: AnimalOvervierwCardProps) {
+  setNotifyFavoriteChange,
+}: AnimalOverviewCardProps) {
   const { attributes, name, scientificName, locations, _id } = animal;
   const { groupBehavior, habitat, diet, group, lifespan } = attributes;
 
@@ -27,6 +29,10 @@ export default function AnimalOvervierwCard({
   const toggleFavorite = () => {
     toggleFavoriteAnimal();
     setIsFavourite(!isFavourite);
+
+    if (typeof setNotifyFavoriteChange === "function") {
+      setNotifyFavoriteChange(Date.now());
+    }
   };
 
   return (
