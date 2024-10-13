@@ -40,7 +40,20 @@ export default function AnimalOvervierwCard({
   return (
     <Card className="min-w-[30%]">
       <CardContent className="flex flex-col gap-1">
-        <h1 className="text-xl font-bold">{name}</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-bold">{name}</h1>
+          <CardActions>
+            <IconButton onClick={toggleFavorite}>
+              <FavoriteIcon
+                className={`${
+                  isFavourite
+                    ? "text-red-500 hover:text-gray-500"
+                    : "text-gray-500 hover:text-red-500"
+                }`}
+              />
+            </IconButton>
+          </CardActions>
+        </div>
         <p className="opacity-90">{scientificName}</p>
         <p className="opacity-80 text-sm">{locations.join(" | ")}</p>
         <AnimalAttribute
@@ -74,17 +87,6 @@ export default function AnimalOvervierwCard({
           allowAnimalAttributeRate={allowAnimalAttributeRate}
         />
       </CardContent>
-      <CardActions>
-        <IconButton onClick={toggleFavorite}>
-          <FavoriteIcon
-            className={`${
-              isFavourite
-                ? "text-red-500 hover:text-gray-500"
-                : "text-gray-500 hover:text-red-500"
-            }`}
-          />
-        </IconButton>
-      </CardActions>
     </Card>
   );
 }
