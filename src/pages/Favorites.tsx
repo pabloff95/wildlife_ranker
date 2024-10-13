@@ -20,6 +20,7 @@ export default function Favorites() {
     <div className="w-5/6">
       <AnimalsOverview
         animals={animals}
+        sectionClassName="my-6"
         setNotifyFavoriteChange={setNotifyFavoriteChange}
         allowAnimalAttributeRate={true}
       />
