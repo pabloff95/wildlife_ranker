@@ -35,17 +35,16 @@ export default function AnimalSearchForm({ setQuery }: AnimalSearchFormProps) {
         className="flex align-items-center"
         onSubmit={searchAnimal}
       >
-        <IconButton type="button" aria-label="search">
+        <IconButton type="button">
           <SearchIcon />
         </IconButton>
         <InputBase
           className="grow"
           name="userQuery"
           placeholder="Search an animal"
-          inputProps={{ "aria-label": "search google maps" }}
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton color="primary" aria-label="directions" type="submit">
+        <IconButton color="primary" type="submit">
           <DirectionsIcon />
         </IconButton>
       </Paper>

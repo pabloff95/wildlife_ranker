@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 
 interface AnimalsOverviewProps {
   animals: AnimalInformation[];
+  allowAnimalAttributeRate: boolean;
   setNotifyFavoriteChange?: Dispatch<SetStateAction<number>>;
   sectionClassName?: string;
 }
@@ -12,6 +13,7 @@ interface AnimalsOverviewProps {
 export default function AnimalsOverview({
   animals,
   sectionClassName,
+  allowAnimalAttributeRate,
   setNotifyFavoriteChange,
 }: AnimalsOverviewProps) {
   if (animals.length === 0) {
@@ -34,6 +36,7 @@ export default function AnimalsOverview({
             animal={animal}
             key={animal._id}
             setNotifyFavoriteChange={setNotifyFavoriteChange}
+            allowAnimalAttributeRate={allowAnimalAttributeRate}
           />
         );
       })}

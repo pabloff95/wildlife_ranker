@@ -55,7 +55,11 @@ export default function AnimalSearch() {
         )}
       </div>
       {animals && !isLoading && (
-        <AnimalsOverview animals={animals} sectionClassName="mb-6" />
+        <AnimalsOverview
+          animals={animals}
+          sectionClassName="mb-6"
+          allowAnimalAttributeRate={false}
+        />
       )}
     </div>
   );

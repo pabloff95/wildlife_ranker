@@ -21,6 +21,7 @@ export default function Favorites() {
       <AnimalsOverview
         animals={animals}
         setNotifyFavoriteChange={setNotifyFavoriteChange}
+        allowAnimalAttributeRate={true}
       />
     </div>
   );

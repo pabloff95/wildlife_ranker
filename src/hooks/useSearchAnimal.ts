@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ANIMAL_RATE } from "../constants";
 
 interface AnimalNinjaAPIRawData {
   name: string;
@@ -11,12 +12,17 @@ interface AnimalNinjaAPIRawData {
   };
 }
 
+interface AnimalAttributeObj {
+  value: string;
+  rate: number;
+}
+
 interface AnimalAttributes {
-  groupBehavior: string;
-  habitat: string;
-  diet: string;
-  group: string;
-  lifespan: string;
+  groupBehavior: AnimalAttributeObj;
+  habitat: AnimalAttributeObj;
+  diet: AnimalAttributeObj;
+  group: AnimalAttributeObj;
+  lifespan: AnimalAttributeObj;
 }
 
 interface AnimalInformation {
@@ -50,11 +56,26 @@ const parseAnimalNinjaAPIResponse = (
 
     const attributes = {
       // Here just a few atrributes listed to meet the requirements of this app
-      groupBehavior: characteristics?.group_behavior || "-",
-      habitat: characteristics?.habitat || "-",
-      diet: characteristics?.diet || "-",
-      group: characteristics?.group || "-",
-      lifespan: characteristics?.lifespan || "-",
+      groupBehavior: {
+        value: characteristics?.group_behavior || "-",
+        rate: ANIMAL_RATE.notRated,
+      },
+      habitat: {
+        value: characteristics?.habitat || "-",
+        rate: ANIMAL_RATE.notRated,
+      },
+      diet: {
+        value: characteristics?.diet || "-",
+        rate: ANIMAL_RATE.notRated,
+      },
+      group: {
+        value: characteristics?.group || "-",
+        rate: ANIMAL_RATE.notRated,
+      },
+      lifespan: {
+        value: characteristics?.lifespan || "-",
+        rate: ANIMAL_RATE.notRated,
+      },
     };
 
     return {
@@ -131,4 +152,9 @@ const useSearchAnimal = ({
 };
 
 export { useSearchAnimal };
-export type { UseSearchAnimalReturn, AnimalInformation, AnimalAttributes };
+export type {
+  UseSearchAnimalReturn,
+  AnimalInformation,
+  AnimalAttributes,
+  AnimalAttributeObj,
+};

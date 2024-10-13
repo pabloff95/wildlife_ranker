@@ -1,4 +1,4 @@
-import { ANIMAL_LIST_NAME } from "../../constants/strings";
+import { ANIMAL_LIST_NAME } from "../../constants";
 import { AnimalInformation } from "../useSearchAnimal";
 
 export default function useGetFavoriteAnimalsList() {
@@ -9,8 +9,12 @@ export default function useGetFavoriteAnimalsList() {
       ? JSON.parse(favoriteAnimals)
       : [];
 
-    return parsedFavoriteAnimals.map(
+    const animalsList = parsedFavoriteAnimals.map(
       ({ animal }: { animal: AnimalInformation }) => animal
+    );
+
+    return animalsList.sort((a: AnimalInformation, b: AnimalInformation) =>
+      a.name.localeCompare(b.name)
     );
   };
 }

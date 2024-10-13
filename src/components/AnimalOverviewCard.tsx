@@ -7,18 +7,20 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import useToggleFavoriteAnimal from "../hooks/localStorage/useToggleFavoriteAnimal";
 import useIsAnimalInFavoriteList from "../hooks/localStorage/useIsAnimalInFavoriteList";
+import AnimalAttribute from "./AnimalAttribute";
 
 interface AnimalOverviewCardProps {
   animal: AnimalInformation;
+  allowAnimalAttributeRate: boolean;
   setNotifyFavoriteChange?: Dispatch<SetStateAction<number>>;
 }
 
 export default function AnimalOvervierwCard({
   animal,
+  allowAnimalAttributeRate,
   setNotifyFavoriteChange,
 }: AnimalOverviewCardProps) {
-  const { attributes, name, scientificName, locations, _id } = animal;
-  const { groupBehavior, habitat, diet, group, lifespan } = attributes;
+  const { name, scientificName, locations, _id } = animal;
 
   const [isFavourite, setIsFavourite] = useState<boolean>(
     useIsAnimalInFavoriteList({ _id })
@@ -41,29 +43,39 @@ export default function AnimalOvervierwCard({
         <h1 className="text-xl font-bold">{name}</h1>
         <p className="opacity-90">{scientificName}</p>
         <p className="opacity-80 text-sm">{locations.join(" | ")}</p>
-        <p>
-          <b>Group: </b>
-          <span>{group}</span>
-        </p>
-        <p>
-          <b>Diet: </b>
-          <span>{diet}</span>
-        </p>
-        <p>
-          <b>Habitat: </b>
-          <span>{habitat}</span>
-        </p>
-        <p>
-          <b>Lifespan: </b>
-          <span>{lifespan}</span>
-        </p>
-        <p>
-          <b>Group behavior: </b>
-          <span>{groupBehavior}</span>
-        </p>
+        <AnimalAttribute
+          animal={animal}
+          title="Group:"
+          attributeKey="group"
+          allowAnimalAttributeRate={allowAnimalAttributeRate}
+        />
+        <AnimalAttribute
+          animal={animal}
+          title="Diet:"
+          attributeKey="diet"
+          allowAnimalAttributeRate={allowAnimalAttributeRate}
+        />
+        <AnimalAttribute
+          animal={animal}
+          title="Habitat:"
+          attributeKey="habitat"
+          allowAnimalAttributeRate={allowAnimalAttributeRate}
+        />
+        <AnimalAttribute
+          animal={animal}
+          title="Lifespan:"
+          attributeKey="lifespan"
+          allowAnimalAttributeRate={allowAnimalAttributeRate}
+        />
+        <AnimalAttribute
+          animal={animal}
+          title="Group behavior:"
+          attributeKey="groupBehavior"
+          allowAnimalAttributeRate={allowAnimalAttributeRate}
+        />
       </CardContent>
       <CardActions>
-        <IconButton aria-label="favorite" onClick={toggleFavorite}>
+        <IconButton onClick={toggleFavorite}>
           <FavoriteIcon
             className={`${
               isFavourite

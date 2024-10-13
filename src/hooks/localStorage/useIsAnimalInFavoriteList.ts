@@ -1,4 +1,4 @@
-import { ANIMAL_LIST_NAME } from "../../constants/strings";
+import { ANIMAL_LIST_NAME } from "../../constants";
 import { AnimalInformation } from "../useSearchAnimal";
 
 interface UseIsAnimalInFavoriteListProps {
