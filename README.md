@@ -17,3 +17,7 @@ Then navigate to the port [4200](http://localhost:4200/).
 ## Run the ESLint
 
 To run the linter: `npm run lint`
+
+## Run the tests
+
+To run the test: `npm test`
